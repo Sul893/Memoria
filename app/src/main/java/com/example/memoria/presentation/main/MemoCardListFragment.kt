@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.memoria.databinding.MemoCardListFragmentBinding
 import com.example.memoria.domain.MemoEntity
 
@@ -26,22 +28,10 @@ class MemoCardListFragment: Fragment() {
         binding = MemoCardListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        var margin = 0
-
-        val memoLiveDataObserver = Observer<MemoEntity>{ memo ->
-
-             margin += view.layoutParams.height
-
-            val fragment = MemoCardFragment.newInstance(memo.name, memo.description, margin)
-
-            parentFragmentManager.commit {
-                add(binding.fcvMemoListContainer.id, fragment)
-            }
-        }
-
-        viewModel.lastMemoAddedLiveData.observe(viewLifecycleOwner, memoLiveDataObserver)
+        binding.rvMemoList.adapter = MemoCardListRecyclerViewAdapter(viewModel.memoList)
+        binding.rvMemoList.layoutManager = LinearLayoutManager(context)
 
         return view
-
     }
+
 }

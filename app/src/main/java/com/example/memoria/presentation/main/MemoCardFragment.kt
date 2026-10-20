@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.doOnLayout
 import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.memoria.databinding.MemoCardBinding
 import com.example.memoria.domain.dp
@@ -25,10 +26,12 @@ class MemoCardFragment: Fragment() {
         fun newInstance(
             name: String,
             description: String,
+            margin: Int
         ) = MemoCardFragment().apply{
             arguments = Bundle().apply{
                 putString(ARG_NAME, name)
                 putString(ARG_DESC,description)
+                putInt(ARG_MARGIN, margin)
             }
 
             Log.i(TAG, "instansieted!")
@@ -40,6 +43,8 @@ class MemoCardFragment: Fragment() {
 
     private var _binding: MemoCardBinding? = null
     private val binding get() = _binding!!  // надо разобраться с тем что такое Binding
+
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,16 +67,6 @@ class MemoCardFragment: Fragment() {
 
         binding.tvNameField.text = name
         binding.tvDescField.text = description
-
-        view.doOnLayout {
-
-
-
-            val params = view.layoutParams as ViewGroup.MarginLayoutParams
-            params.setMargins(0, margin.dp(), 0,0)
-        }
-
-
 
         return view
     }
