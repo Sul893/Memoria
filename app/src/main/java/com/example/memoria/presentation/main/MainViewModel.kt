@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 class MainViewModel: ViewModel() {
 
     private val TAG = "mainViewModel"
-    public val memoList = ArrayList<MemoEntity>()
+    val memoList = ArrayList<MemoEntity>()
 
     private var memo = MemoEntity(0,"","",)
     var memo_id = 0
