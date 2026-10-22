@@ -44,4 +44,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    implementation("com.github.fornewid:neumorphism:0.3.2")
+
 }

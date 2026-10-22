@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.maven
+
 pluginManagement {
     repositories {
         google {
@@ -19,8 +21,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri{"https://jitpack.io"} }
     }
 }
+
 
 rootProject.name = "Memoria"
 include(":app")
